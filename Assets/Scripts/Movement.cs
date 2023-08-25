@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     public CharacterController controller;
 
     public float speed = 12f;
+    public float sprintSpeed = 16f;
 
     Vector3 velocity;
 
@@ -19,11 +20,27 @@ public class Movement : MonoBehaviour
     public LayerMask groundLayerMask;
 
     private bool isGrounded;
+
+    public GameObject SteamShot;
+
+    public float switchCount = 0f;
+
+    public GameObject L;
+    public GameObject R;
+
+    public GameObject G;
+
+    public bool sprint;
+
+    public float energy = 0f;
     // Start is called before the first frame update
 
     // Update is called once per frame
     void Update()
     {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        Vector3 move = transform.right * x + transform.forward * z;
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundLayerMask);
         if(isGrounded && velocity.y < 0)
         {
@@ -33,15 +50,74 @@ public class Movement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(JumpHeight * -2f * gravity);
         }
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward *z;
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            if(switchCount >= 1) 
+            {
+                switchCount = 0;
+            }
+            else
+            {
+                switchCount += 1;
+            }
+        }
+        if (switchCount == 1)
+        {
+            L.SetActive(false);
+            R.SetActive(false);
+            G.SetActive(true);
+        }
+        else if (switchCount == 0)
+        {
+            L.SetActive(true);
+            R.SetActive(true);
+            G.SetActive(false);
+            if (Input.GetKey(KeyCode.E))
+            {
+                SteamShot.SetActive(true);
+            }
+            else
+            {
+                SteamShot.SetActive(false);
+            }
+        }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            sprint = true;
+        }
+        else
+        { 
+            sprint = false; 
+        }
 
-        controller.Move(move * speed * Time.deltaTime);
+        if (sprint == true && energy <= 10)
+        {
+            energy += Time.deltaTime;
+            controller.Move(move * sprintSpeed * Time.deltaTime);
 
-        velocity.y += gravity * Time.deltaTime;
+            velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.deltaTime);
+            controller.Move(velocity * Time.deltaTime);
+        }
+        else if(energy <= 0)
+        {
+            energy = 0;
+            controller.Move(move * speed * Time.deltaTime);
+
+            velocity.y += gravity * Time.deltaTime;
+
+            controller.Move(velocity * Time.deltaTime);
+        }
+        else if(energy >= 0 && sprint == false)
+        {
+            energy -= 0.1f;
+            controller.Move(move * speed * Time.deltaTime);
+
+            velocity.y += gravity * Time.deltaTime;
+
+            controller.Move(velocity * Time.deltaTime);
+        }
+
     }
 }
