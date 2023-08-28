@@ -39,6 +39,10 @@ public class Shoot : MonoBehaviour
             if(Physics.Raycast(rayOrigin,Camera.main.transform.forward, out hit) )
             {
                 line.SetPosition(1, hit.point);
+                if (hit.transform.tag == "Enemy")
+                {
+                    hit.collider.gameObject.GetComponent<HealthManager>().TakeDamage();
+                }
             }
             else
             {

@@ -33,6 +33,9 @@ public class Movement : MonoBehaviour
     public bool sprint;
 
     public float energy = 0f;
+
+    public float Lifetime = 10f;
+   
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -49,6 +52,10 @@ public class Movement : MonoBehaviour
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(JumpHeight * -2f * gravity);
+        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
 
         if(Input.GetKeyDown(KeyCode.Q))
@@ -73,13 +80,10 @@ public class Movement : MonoBehaviour
             L.SetActive(true);
             R.SetActive(true);
             G.SetActive(false);
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                SteamShot.SetActive(true);
-            }
-            else
-            {
-                SteamShot.SetActive(false);
+                Instantiate(SteamShot,transform.position,transform.rotation);
+                Lifetime -= Time.deltaTime;
             }
         }
         if (Input.GetKey(KeyCode.LeftShift))
