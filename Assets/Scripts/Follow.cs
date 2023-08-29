@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Follow : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     public Transform player;
     // Start is called before the first frame update
@@ -18,5 +18,6 @@ public class Follow : MonoBehaviour
     void Update()
     {
         agent.SetDestination(player.position);
+        
     }
 }

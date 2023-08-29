@@ -25,9 +25,6 @@ public class Movement : MonoBehaviour
 
     public float switchCount = 0f;
 
-    public GameObject L;
-    public GameObject R;
-
     public GameObject G;
 
     public bool sprint;
@@ -35,6 +32,8 @@ public class Movement : MonoBehaviour
     public float energy = 0f;
 
     public float Lifetime = 10f;
+
+    public GameObject[] hands;
    
     // Start is called before the first frame update
 
@@ -71,15 +70,19 @@ public class Movement : MonoBehaviour
         }
         if (switchCount == 1)
         {
-            L.SetActive(false);
-            R.SetActive(false);
             G.SetActive(true);
+            for(int i = 0; i < hands.Length;i++)
+            {
+                hands[i].SetActive(false);
+            }
         }
         else if (switchCount == 0)
         {
-            L.SetActive(true);
-            R.SetActive(true);
             G.SetActive(false);
+            for (int i = 0; i < hands.Length; i++)
+            {
+                hands[i].SetActive(true);
+            }
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Instantiate(SteamShot,transform.position,transform.rotation);

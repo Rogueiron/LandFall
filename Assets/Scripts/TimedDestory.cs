@@ -5,23 +5,20 @@ using UnityEngine;
 
 public class TimedDestory : MonoBehaviour
 {
-    private float timer = 6;
+    private float timer = 1.1f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Invoke(nameof(Delete), timer);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(timer < 0) 
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            timer -= Time.deltaTime;
-        }
+    
+    }
+    private void Delete()
+    {
+        Destroy(gameObject);
     }
 }
