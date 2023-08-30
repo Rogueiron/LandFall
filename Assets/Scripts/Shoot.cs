@@ -33,7 +33,7 @@ public class Shoot : MonoBehaviour
         if (Input.GetMouseButton (0) && fireTimer > fireRate) 
         {
             fireTimer = 0f;
-            
+
             Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
             RaycastHit hit;
             if(Physics.Raycast(rayOrigin,Camera.main.transform.forward, out hit) )
