@@ -22,14 +22,6 @@ public class Follow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (moves.Tank == false)
-        {
             agent.SetDestination(player.position);
-        }
-        else if(moves.Tank == true) 
-        {
-            agent.SetDestination(tank.position);
-        }
-        
     }
 }

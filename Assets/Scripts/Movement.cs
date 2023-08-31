@@ -42,6 +42,8 @@ public class Movement : MonoBehaviour
     private GameObject main;
     private GameObject playerbody;
 
+    public GameObject PunchHand;
+
 
     // Start is called before the first frame update
 
@@ -141,6 +143,11 @@ public class Movement : MonoBehaviour
                 velocity.y += gravity * Time.deltaTime;
 
                 controller.Move(velocity * Time.deltaTime);
+            }
+
+            if(Input.GetKey(KeyCode.V)) 
+            {
+                PunchHand.GetComponent<Animator>().Play("Punch");
             }
         }
     }

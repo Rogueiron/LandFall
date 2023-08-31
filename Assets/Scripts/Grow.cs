@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grow : MonoBehaviour
 {
 
-    public ParticleSystem particleSystem;
+    public new ParticleSystem particleSystem;
     // Start is called before the first frame update
     void Start()
     {
