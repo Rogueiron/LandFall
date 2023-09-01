@@ -3,7 +3,12 @@ guid: af01cd1caac986745a8bdd4ccebe0035
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - controller: {instanceID: 0}
+  - groundCheck: {instanceID: 0}
+  - SteamShot: {instanceID: 0}
+  - G: {instanceID: 0}
+  - PunchHand: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
